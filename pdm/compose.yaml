@@ -1,9 +1,9 @@
 services:
   pdm:
     image: devzwf/proxmox-datacenter-manager:latest
-    tmpfs: '
+    tmpfs:
       - /run
-      - /run/lock'
+      - /run/lock
     environment:
         PDM_TIMEZONE: 'Europe/Berlin'
     volumes:
