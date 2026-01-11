@@ -1,0 +1,23 @@
+services:
+  pdm:
+    image: devzwf/proxmox-datacenter-manager:latest
+    tmpfs: '
+      - /run
+      - /run/lock'
+    environment:
+        PDM_TIMEZONE: 'Europe/Berlin'
+    volumes:
+        - '/sys/fs/cgroup:/sys/fs/cgroup:rw'
+        # Config files
+        - '/opt/pdm/config:/etc/proxmox-datacenter-manager'
+        # Database and state
+        - '/opt/pdm/data:/var/lib/proxmox-datacenter-manager'
+        # Logs
+        - '/opt/pdm/logs:/var/log/proxmox-datacenter-manager'
+        # Root home (optional, for shell history etc)
+        - '/opt/pdm/root:/root'
+    cgroup: host
+    container_name: proxmox-datacenter-manager
+    ports:
+      - 127.0.0.1:8443:8443
+    restart: unless-stopped
